@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+    <title>Checklist</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="checklist row ">
+                <div class=" col-lg-7 col-md-7 col-12">
+                    <div class="shopping d-flex align-items-center align-items-md-start flex-column w-100">
+                        <h2 class="shopping--maintitle">Shopping Continue</h2>
+                        <hr class="shopping--line w-100" >
+                        <h3 class="shopping--title">Shopping cart</h3>
+                        <p class="shopping--subtitle"></p>
+                        <div class="items">
+                        </div>
+                    </div>
+                </div>
+                <div class="payment col-lg-4 col-md-5 col-12 mt-md-0 mt-4">
+                    <div class="d-flex align-items-center flex-column justify-content-center">
+                        <div class="card--user d-flex align-items-center justify-content-between w-100">
+                            <h2>Card Details</h2>
+                            <img src="./images/user.png" alt="User">
+                        </div>
+                        <div class="card--types d-flex flex-column align-items-start justify-content-between w-100">
+                            <h5>Card types</h5>
+                            <div class="card--all d-flex flex-md-nowrap flex-wrap align-items-center gap-4 gap-sm-2 justify-content-center justify-content-sm-between w-100">
+                                <div class="card--type d-flex align-items-center justify-content-center">
+                                    <img src="./images/mastercard.png" alt="Masteercard">
+                                </div>
+                                <div class="card--type d-flex align-items-center justify-content-center">
+                                    <img src="./images/visa.png" alt="Visa">
+                                </div>
+                                <div class="card--type d-flex align-items-center justify-content-center">
+                                    <img src="./images/rupay.png" alt="Rupay">
+                                </div>
+                                <div class="card--type d-flex align-items-center justify-content-center">
+                                    <a href="#">See all</a>
+                                </div>
+                            </div>
+                        </div>
+                        <form action="#" method="POST" class="card-form w-100 d-flex flex-column align-items-start">
+                            <label for="name">Name on card</label>
+                            <input type="text" name="name" id="name" required placeholder="Name" autocomplete="off">
+                            <label for="number">Card Number</label>
+                            <input type="text" id="number" name="number" required placeholder="1111-2222-3333-4444" required>
+                            <div class="d-flex flex-column flex-sm-row w-100">
+                                <div class="w-100">
+                                    <label for="date" class="w-100">Expiration date
+                                        <input type="date" name="date" id="date" required>
+                                    </label>
+                                </div>
+                                <div class="ms-0 ms-sm-2 w-100">
+                                    <label for="cvv" class="cvv w-100">CVV
+                                        <input type="password" name="password" id="cvv" placeholder="123" min="1" maxlength="3" required autocomplete="off">
+                                        <i class="fa-solid fa-eye" id="show-password"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="shipment">
+                            <div class="subtotal">
+                                <span>Subtotal</span>
+                                <span class="subtotal-all">0</span>
+                            </div>
+                            <div class="shipping">
+                                <span>Shipping</span>
+                                <span>$4</span>
+                            </div>
+                            <div class="total">
+                                <span>Total (Tax. incl.)</span>
+                                <span class="total--all">0</span>
+                            </div>
+                            <button class="checkout">
+                                <span class="checkout--all"></span>
+                                <div>
+                                    <span>Checkout</span>
+                                    <img src="./images/arrow.svg" alt="">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="./bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="./js/card-number.js"></script>
+    <script src="./js/cvv-reveal.js"></script>
+    <!-- <script src="./js/dataIndexedDB.js"></script> -->
+    <script src="./js/data.js"></script>
+    <script src="./js/counter.js"></script>
+</body>
+</html>
