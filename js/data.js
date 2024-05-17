@@ -3,7 +3,7 @@ const foodData = [
         "id": 1,
         src: "./../images/pizza.png",
         name: "Pizza",
-        ingredients: ["cheese", "topinig"],
+        ingredients: ["cheese", "toping"],
         price: 681,
     },
     {
@@ -27,11 +27,11 @@ function addFood(item) {
     if (!localStorage.getItem('foods')) {
         localStorage.setItem('foods', JSON.stringify(item));
     }
-    let foods = JSON.parse(localStorage.getItem('foods'));
-    if (!foods) {
-        foods.push(item);
-        localStorage.setItem('foods', JSON.stringify(foods));
-    }
+    // let foods = JSON.parse(localStorage.getItem('foods'));
+    // if (!foods) {
+    //     foods.push(item);
+    //     localStorage.setItem('foods', JSON.stringify(foods));
+    // }
 }
 
 function getAllFood() {
@@ -41,7 +41,6 @@ function getAllFood() {
     foodNumber.innerHTML = `You have ${foods.length} items in your cart.` 
 
     const allFoodContainer = document.querySelector(".items");
-    allFoodContainer.innerHTML = "";
     foods.forEach(item => {
         const foodDiv = document.createElement('div');
         foodDiv.classList.add('item');
@@ -58,7 +57,7 @@ function getAllFood() {
         </div>
         <div class="d-flex align-items-center gap-sm-1 gap-md-2 gap-2">
             <div class="item--number">
-                <input type="number" value="0" min="0" max="99" class="item--count" name="number" data-id=${item.id}>
+                <input type="number" value="0" min="0" max="99" class="item--count" name="number" data-id=${item.id} data-selected="true    ">
                 <div class="item--counter">
                     <img src="./images/top.svg" alt="Top" class="item--count--top">
                     <img src="./images/bottom.svg" alt="Bottom" class="item--count--bottom">
@@ -80,6 +79,8 @@ function deleteFood(id) {
         if (index !== -1) {
             foods.splice(index, 1);
             localStorage.setItem('foods', JSON.stringify(foods));
+            console.log(foods);
+            // getAllFood();
             alert(`Your food is removed from cart.`)
             const foodNumber = document.querySelector(".shopping--subtitle");
             foodNumber.innerHTML = `You have ${foods.length} items in your cart.` 
@@ -93,6 +94,7 @@ function deleteFood(id) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
+
 
     const inputValue = document.querySelectorAll(".item--count");
     const subtotal = document.querySelector(".subtotal-all");
@@ -108,6 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
             subTotal = Array.from(inputValue).reduce((acc, input) => {
                 let itemId = input.dataset.id;
                 let itemIndex = foods.findIndex(item => item.id == itemId);
+                if (itemIndex == -1) itemIndex = itemId
+                console.log(itemIndex);
                 let itemCount = parseInt(input.value) || 0;
                 return acc + (itemCount * foods[itemIndex].price);
             }, 0);
@@ -123,10 +127,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const deleteButtons = document.querySelectorAll('.item--delete');
     deleteButtons.forEach(button => {
+        let foods = JSON.parse(localStorage.getItem('foods'));
         button.addEventListener('click', function(event) {
-            const id = event.target.dataset.id;
-            deleteFood(id);
+            console.log(foods);
             const foodContent = event.target.closest(".item");
+            const input = foodContent.children[1].children[1].children[0].children[0];
+            const id = event.target.dataset.id;
+            let itemIndex = foods.findIndex(item => item.id == id);
+            console.log(foods[itemIndex]);
+            let itemCount = parseInt(input.value) || 0;
+            let sum = itemCount * foods[itemIndex].price;
+            console.log(subTotal);
+            console.log(sum);
+            // subTotal -= sum;
+            let newTotal = subTotal - sum;
+            // sum = 0
+            if (newTotal == 0) totalSum = 0
+            else totalSum = newTotal + 4;
+
+            
+            subtotal.innerText =  `$${newTotal}`;
+            total.innerText = `$${totalSum}`;
+            checkout.innerText = `$${totalSum}`;
+            deleteFood(id);
             foodContent.remove();
         });
     });
